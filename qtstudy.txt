@@ -1,0 +1,85 @@
+QT：		实战教程网址：https://blog.csdn.net/liang19890820/article/details/50277095
+用new创建的对象存放在堆中，不会自动被回收。
+QT+=core gui是有ui界面需要的，单纯的c++程序不需要添加，如果需要操作数据库，还需要添加QT+=sql。
+只有.h,.cpp,.ui文件会自动更新，其余文件需要认为修改。
+通过窗口类型枚举值修改窗口风格。
+模态对话框即悬停在屏幕上方，不可与其他窗口进行交互，非模态可以。模态只需要调用exec（）函数即可,只有关闭exec弹出的窗口才能继续执行下去;也可以new一个对象然后用setModel（true）再show即可，这种方法会直接执行下去这里setModel（true）是让后面的所有窗口不可被操作也有其他阻塞函数。非模态用show（）函数即可     ---模态对话框设置阻塞窗口类型。
+用w.setWindowTitle(QObject::tr("科学计算器"));设置文本更好。
+改程序图标：http://www.faviconico.org/ 转换图片为.ico放在项目文件夹中，然后在.pro结尾添加RC_ICONS=xxx.ico即可。
+connect(ui->pushButton,&QPushButton::clicked,this,&MainWindow::calculate);  connect写在构造函数内ui->setupUi之后。
+各种application的区别：widgets具有gui，console普通c/c++程序，无gui，quick采用qml和c++用于移动和嵌入式设备开发，canvas 3D支持3D画布。
+可以用 ui->lineEdit_3->setText(QString::number(result)); 即对象内部部件->函数.方法。
+ui->comboBox->currentIndex() 获得选择框输入值对应的index。
+lineedit中函数：ui->lineEdit_2->text().toDouble(); 字符串转数字。
+const_cast是C++其中一种类型转换运算符，它只有一种用途，就是改变值为const 或 volatile。
+explicit HelloDialog(QWidget *parent = 0);修饰函数表示形参不能自动转换类型。
+ui.setupUi(this);用来调用Qt设计师中通过拖拽而形成的页面
+ui.label->setScaledContents(true);这个成员函数的作用是把label框中的东西进行填充
+Q_OBJECT宏有着连接信号与宏的功能
+QMainWindow 和QDialog 均派生自QWidget， QMainWindow 窗体，比如主窗体、子窗体 QDialog 对话框，比如选项、收缩、设置什么的 QWidget 主要用来自定义控件，当然也可以替代窗体、对话框 
+argc和argv是命令行传进去的参数。比如linux里输入一个命令cp file.c file1.c，那么argc=3 argv就是上面那行字符串数组。因为图形编程有时也需要从命令行传递参数给程序，所以才会有argc和argv。a.exec()就是程序进程开始运行。
+public slots: //表明此函数可以作为public的信号槽函数,可以被外界使用。
+3：窗口部件QWidget：
+qwidget是所有窗口部件的基类。相关的可以直接导入QWidgets头文件。
+dialog对话框splashscreen欢迎FramelessWindowHint无边框窗口WindowStayOnTopHint
+停留在最上层
+函数setWindowState（值）设置窗口状态，Qt：：WindowMaximized最大化，WindowMinimized全屏显示
+默认为WindowNoState。x（）和y（）分别返回坐标xy值，geometry（）和framegeometry（）分别返回无边框和有的窗口矩形值，返回类型为QRect为（x，y，宽，高）move（）设置位置，resize（）设置大小，show（）用来显示窗口，width，height，pos，size函数，rect返回窗口内部矩形。
+在类名上右键follow了可以查看源代码。
+qDebug使用：1直接将参数值打印到qDebug（参数）中显示  2导入qDebug头文件，然后qDebug<<值可以打印到输出中。 
+模态对话框即未关闭之前不能再与其他窗口交互，非模态可以。
+颜色对话框类QColorDialog提供了可以指定颜色的对话框部件。静态方法getColor（设置初始颜色Qt：：red，指定父窗口this，设置对话框标题tr（“颜色对话框”））可以获取颜色。返回值QColor（透明度alpha，红，绿，蓝）都为0.0透明-1.0不透明，红绿蓝还可以用0-255表示，上下限与前者对应。QColorDialog：：showAlphaChannel可以显示alpha设置。
+QFileDialog类提供了一个选择文件的对话框，头文件为QFileDialog。getOpenFileName（指定父窗口this，设置对话框标题tr（“文件对话框”），指定默认打开的目录路径“D”，设置文件类型过滤器tr（“图片文件（“*png *jpg”）；；文本文件（*txt）”））获取选择的文件名，同时会以模态方式打开一个文件对话框。getExistingDirectory（）获取一个已存在的文件夹路径。
+字体对话框：QFontDialog，getFont（&ok，this）获取选择的字体。
+输入对话框：QInputDialog，getText（），getInt，getDouble，getItem，函数分别提供输入对应类型内容的对话框。
+消息对话框：QMessageBox，question（）问题，information提示，warning警告，critical错误，about关于对话框
+进度对话框：QProgressDialog，setWindowTitle设置窗口标题，setWindowModality将对话框设置为模态，setValue设置进度条当前值。
+QCoreApplication：：processEvents（）避免界面冻结。
+错误信息对话框：QErrorMessage，showMessage（tr（“error message”））函数用来打印错误信息。
+向导对话框：QWizard，addPage添加想到页面。
+其他部件继承自QFrame，具有边框设置功能。
+QLabel，setFamily设置字体，setPointSize设置字体大小，setBold设置加粗，setItalic设置斜体，setFont使用新建的字体。
+QMovie，start函数开始播放。
+其他部件：QLCDNumber，QStackedWidget，QToolBox。
+按钮部件：QAbstractButton类为按钮部件的抽象基类，子类有：QPushButton标准按钮，单选框复选框相关：QCheckBox，QRadioButton，QGroupBox。
+行编辑器：QLineEdit，可以输入和编辑文本而且有撤销，恢复，剪切等操作。四种显示模式：Normal正常显示，NoEcho不显示任何输入，Password显示为密码样式，PasswordEchoOnEdit编辑时正常显示，其他情况显示为密码样式。通过inputMask限制输入的内容即输入掩码。可百度关键字：QLineEdit掩码字符。
+QLineEdit中可以加入验证器：QValidator * validator=new QIntValidator（100，999，this）；
+可以自动补全：QCompleter * completer=new QCompleter(wordlist,this);
+QAbstractSpiniBox提供一个数值设定和行编辑器来显示设定值。三个子类：QDateTimeEdit编辑时间日期，QSpinBox设置整数，QDoubleSpinBox设置浮点数。
+QAbstractSlider提供区间内的整数值，三个子类：QScrollBar滚动区域，QSlider进度条等滑块，QDial刻度盘部件。
+4：布局管理QLayout
+基本布局管理器：QBoxLayout，栅格布局管理器QGridLayout，窗体布局管理器QFormLayout此三者一般连用。
+5：拖放操作
+
+
+ui中的各部件：
+1.layouts布局--vertical layout竖排，horizontal layout横排，grid layout网格布局，form layout表单布局  里面的部件排列方式
+2.spacers定位器--horizontal spacer水平间隔,vertical spacer垂直间隔   给设置空白区域。
+3.buttons按钮--push button按键,tool button工具按键即"...",radio button单选按钮,check box多选按钮即方口,command link button命令链接按钮即进入系统形状,dialog button box对话框按钮框即ok和cancel。
+4.item views项目视图(model-based)--list view列表图,tree view树形图,table view表形图,column view列视图  全矩形框
+5.item widgets项目小部件(item-based)--list view,tree view,table view,无column view
+6.containers容器--group box组合框即带标题的矩形框,scrool area滚动区域即矩形框,tool box工具箱即page1和page2,tab widget选项卡小部件即切换编辑窗口,stacked widget堆叠小部件,frame框架,widget小部件,mdi area为mdi区域同dock widget,dock widget停靠小部件即能容纳工具栏的条,qaxwidget
+7.input widgets输入部件组--combo box选择框即下拉框,font combo box字体选择框即下拉选择字体,line edit行编辑器即单行编辑,text edit文本编辑器即可编辑的矩形文本框,plain text edit纯文本编辑器同文本框,spin box数字设定框一位数字的数字编辑,double spin box双数字显示框即带两位小数的数字编辑,time edit时间编辑器,date edit日期编辑器,date/time edit日期和时间编辑器即文本框显示日期和时间可以微调,dial表盘即小球指南针,horizontal slider水平滑块即水平翻页滑块,vertical slider垂直滑块即竖直翻页滑块,key sequence edit键序列编辑即能放四个用逗号隔开值的文本框
+8.display widgets显示组件--label标签显示文本,text browser文本浏览器即同视图窗口不同是它可以选中,graphics view视图窗口即白底有边框矩形区域,calendar widget日历小工具即日历,lcd number为lcd显示数字即lcd数字,progress bar进度条效果即进度条,horizontal line水平线即水平边框线,vertical line垂直线即垂直边框线,opengl widget为opengl小部件即黑格子,qquickwidget快速小部件
+
+
+项目中各个文件及其干系：
+.h--对本类宏定义而且导入父类头文件；定义命名空间Ui，本类继承谁，声明构造析构函数模型，指向本类的指针。
+.cpp--导入本类.h文件以及ui对应的.h文件。ui对应的.h文件定义本ui文件对应的宏并导入部件对应类的头文件；定义一个具有各个部件对象的类然后在namespace中使本类继承该类。
+
+c++:
+1.使用静态类型的编程语言是在编译时执行类型检查，而不是在运行时执行类型检查。
+2.标准的 C++ 由三个组成：核心语言，C++ 标准库，标准模板库（STL）。
+3.ANSI 标准是为了确保 C++ 的便携性 —— 代码在各种计算机上都能通过编译。所有主要的 C++ 编译器的制造商都支持 ANSI 标准。
+4.C++ 通常用于编写设备驱动程序和其他要求实时性的直接操作硬件的软件。
+5.现阶段为c++14.  GNU 的 gcc 编译器适合于 C 和 C++ 编程语言。大多数的 C++ 编译器并不在乎源文件的扩展名，默认使用 .cpp。用g++ -v来测试是否安装gun的gcc，能显示版本号说明已经安装。windows装gcc需要先有minGW。
+6.const变量ci可以通过 int* p=const_cast<int*>(&ci)；*p=8；修改值
+7.Test(int a=0) : ci(13) 外来值优先，初始化成员列表比默认值优先。
+8.当构造函数的函数体开始执行的时候，对象已经创建完毕了，执行构造函数的函数体仅仅是为了初始化我们这个对象的状态而已；
+
+
+English：
+scalar标量，prototype原型，declared声明，channel渠道-传送，critical关键-严重的，abort小产-终止，algorithm算法，unqualified不合格-无限制，brace一对，enclosed封闭的，tutorial教程，manual手册，quick快的，designer设计师，point指向，bold黑体粗体-大胆的，signal信号，slot槽，inspector检察员，spacers垫片，operand操作数，alignment对齐，madam夫人，
+
+
+疑问：accept（）和acceptdrop（）作用以及区别。
