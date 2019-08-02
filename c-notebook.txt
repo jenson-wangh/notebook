@@ -1,0 +1,36 @@
+1.用gcc -v查看电脑是否安装GNU的GCC编译器。
+2.定义常量有两种：define和const。
+3.存储类：存储类定义 C 程序中变量/函数的范围（可见性）和生命周期。这些说明符放置在它们所修饰的类型之前。下面列出 C 程序中可用的存储类：（只能修饰局部变量，默认）auto，（优先存储在寄存器中，用于快速访问的变量，由于在寄存器中，没有内存地址，所以不能&取地址）register，（ static会使变量的作用域限制在声明它的文件内，只是将生命周期变为了整个程序，作用域未变化 static int thingy=5放在函数中，多次调用此函数不会将thingy的值重置）static，（extern 声明在其他文件中定义的全局变量或函数）extern
+4.位运算是针对二进制的。
+5.在判断条件中0或null等价，非空和非0等价。
+6.？满足执行1语句，不满足2语句。
+7.注意goto语句执行后继续会向下执行。
+8.条件表达式不存在时，它被假设为真。因此for(;;);while();都可以无限循环。
+9.全局变量与局部变量在内存中的区别：
+全局变量保存在内存的全局存储区中，占用静态的存储单元（默认static修饰）；
+局部变量保存在栈中，只有在所在函数被调用时才动态地为变量分配存储单元。     注意局部变量不会自动初始化。
+10.数组在声明后已经被分配了内存。int arr[10]; sizeof(arr)就是40.
+11.枚举类型中的成员按照int存储，里面的成员可以单独使用，该类型的变量取值范围被限定。int可以类型转换为enum typename。
+12.函数指针： int (* p)(int, int) = & max;用法与普通函数相同。
+13.回调函数就是调用函数的函数，函数本身就是地址，所以实参直接写函数名。如：
+回调函数：void populate_array(int *array, size_t arraySize, int (*getNextValue)(void)){}定义
+使用：   populate_array(myarray, 10, getNextRandomValue);
+14.要将字符串存起来需要定义char数组。字符串相关函数需要引入string.h头文件。
+1	strcpy(s1, s2);
+复制字符串 s2 到字符串 s1。
+2	strcat(s1, s2);
+连接字符串 s2 到字符串 s1 的末尾。
+3	strlen(s1);
+返回字符串 s1 的长度。
+4	strcmp(s1, s2);
+如果 s1 和 s2 是相同的，则返回 0；如果 s1<s2 则返回小于 0；如果 s1>s2 则返回大于 0。
+5	strchr(s1, ch);
+返回一个指针，指向字符串 s1 中字符 ch 的第一次出现的位置。
+6	strstr(s1, s2);
+返回一个指针，指向字符串 s1 中字符串 s2 的第一次出现的位置。
+15.内存管理函数：malloc，free，calloc，realloc重新分配。需要引入stdlib头文件。
+16.fopen函数中的路径符号为斜杠/.
+17.文件读写流程：定义FILE *file，file=fopen（“path”，“mode”），fprintf（file，string）和fputs（string，file）写入字符串。最后fclose（file）。读函数：fscanf（file，“format”，char【】name）以空格结束 和fgets（char【】name，读取length，file）按长度读取。
+18.process头文件中包含了system("cls")用来清屏，“pause”屏幕暂停，“dir”显示创建文件夹后的文件夹信息。direct.h包含了mkdir，rmdir等目录相关操作的函数。
+19.errno.h中有各种错误处理函数。perror("by perror output error:");输出字符串后显示错误信息。strerror(errno)与perror类似，但是要写在printf（string，strerror（））里面。
+20.小技巧：交换两数可以用和，判断奇数偶数可以用按位与。
